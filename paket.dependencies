@@ -1,0 +1,12 @@
+source https://api.nuget.org/v3/index.json
+
+nuget Microsoft.AspNetCore.OpenApi
+nuget OpenTelemetry
+nuget OpenTelemetry.Exporter.OpenTelemetryProtocol
+nuget OpenTelemetry.Exporter.Console
+nuget OpenTelemetry.Instrumentation.Http
+nuget OpenTelemetry.Instrumentation.AspNetCore
+nuget OpenTelemetry.Instrumentation.Runtime
+nuget OpenTelemetry.Instrumentation.Process
+nuget OpenTelemetry.Extensions.Hosting
+nuget Microsoft.Extensions.Telemetry.Abstractions

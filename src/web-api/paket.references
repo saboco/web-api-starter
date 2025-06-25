@@ -1,0 +1,10 @@
+Microsoft.AspNetCore.OpenApi
+OpenTelemetry
+OpenTelemetry.Exporter.OpenTelemetryProtocol
+OpenTelemetry.Exporter.Console
+OpenTelemetry.Instrumentation.Http
+OpenTelemetry.Instrumentation.AspNetCore
+OpenTelemetry.Instrumentation.Runtime
+OpenTelemetry.Instrumentation.Process
+OpenTelemetry.Extensions.Hosting
+Microsoft.Extensions.Telemetry.Abstractions

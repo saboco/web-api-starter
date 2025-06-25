@@ -1,0 +1,24 @@
+﻿services:
+  web-api:
+    image: web-api
+    build:
+      context: .
+      dockerfile: src/web-api/Dockerfile
+    ports:
+      - "5042:8080"
+      - "7115:8081"
+    environment:
+      - Otlp__Endpoint=http://otel-stack:4317
+      - OTEL_METRIC_EXPORT_INTERVAL=5000 # so we don't have to wait 60s for metrics
+      - OTEL_EXPORTER_OTLP_METRICS_DEFAULT_HISTOGRAM_AGGREGATION=base2_exponential_bucket_histogram
+    depends_on:
+        - otel-stack
+
+  otel-stack:
+    image: ghcr.io/grafana/docker-otel-lgtm:main
+    ports:
+      - "3000:3000"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      - OTEL_EXPORTER_OTLP_METRICS_DEFAULT_HISTOGRAM_AGGREGATION=base2_exponential_bucket_histogram
