@@ -25,27 +25,26 @@ builder.Services
                     }
                 };
             })
-            .AddConsoleExporter()
+            //.AddConsoleExporter()
             .AddOtlpExporter(otelpExporter => otelpExporter.Endpoint = otlpEndpoint)
-
     )
-    .WithMetrics( meterBuilder =>
+    .WithMetrics(meterBuilder =>
         meterBuilder
             .AddAspNetCoreInstrumentation()
             .AddView(
-                instrumentName:"http.server.request.duration",
+                instrumentName: "http.server.request.duration",
                 new Base2ExponentialBucketHistogramConfiguration())
             .AddView(
-                instrumentName:"kestrel.connection.duration",
+                instrumentName: "kestrel.connection.duration",
                 new Base2ExponentialBucketHistogramConfiguration())
             // .AddRuntimeInstrumentation()
             // .AddProcessInstrumentation()
-            .AddConsoleExporter()
+            //.AddConsoleExporter()
             .AddOtlpExporter(otelpExporter => otelpExporter.Endpoint = otlpEndpoint)
-        )
+    )
     .WithLogging(loggerBuilder =>
         loggerBuilder
-            .AddConsoleExporter()
+            //.AddConsoleExporter()
             .AddOtlpExporter(otelpExporter => otelpExporter.Endpoint = otlpEndpoint)
     );
 
@@ -62,25 +61,37 @@ builder.Services
             Address = new Uri("http://localhost:8888") // Fiddler
         },
         UseProxy = false, // enable proxy
-        ServerCertificateCustomValidationCallback =(_,_,_,_) => true
+        ServerCertificateCustomValidationCallback = (_, _, _, _) => true
     });
+
+builder.Services.AddSingleton(new Db());
+
+builder.Services.AddSingleton(new QuestionsStore());
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-}
 
-app.UseHttpsRedirection();
+    // app.UseExceptionHandler(exceptionHandlerApp =>
+    // {
+    //     exceptionHandlerApp.Run(async context =>
+    //     {
+    //
+    //     });
+    // });
+
+}
+// app.UseHttpsRedirection();
 
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipconfig) =>
+app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipconfig, Db db) =>
     {
         var country = await ipconfig.GetSomething("/country");
         var forecast = Enumerable.Range(1, 5).Select(index =>
@@ -95,6 +106,7 @@ app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipcon
 
         foreach (var item in forecast)
         {
+            db.InsertWeatherForecast(item);
             logger.GetWeatherForecast(item);
         }
 
@@ -102,13 +114,42 @@ app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipcon
     })
     .WithName("GetWeatherForecast");
 
+app.MapGet("/weatherforecast_db", (ILogger<Program> logger, Db db) =>
+    {
+        var forecast = db.GetWeatherForecast();
+        return forecast;
+    })
+    .WithName("GetWeatherForecastDb");
+
+
+app.MapPost("/questions", async (HttpContext context, QuestionsStore questionsStore) =>
+{
+    var question = await context.Request.ReadFromJsonAsync<Question>();
+    questionsStore.Add(question);
+
+});
+
+app.MapGet("/questions", async (ILogger<Program> logger, QuestionsStore questionsStore) =>
+    {
+        return questionsStore.GetQuestions();
+    }
+);
+
+app.MapPut("/vote", async (HttpContext context, QuestionsStore questionsStore) =>
+{
+    var vote =  await context.Request.ReadFromJsonAsync<Vote>();
+    questionsStore.Vote(vote);
+});
+
+
+
 app.Run();
 
 public partial class Program
 {
 }
 
-public record WeatherForecast(DateOnly Date, int TemperatureC, string Country, string? Summary)
+public record WeatherForecast(DateOnly Date, long TemperatureC, string Country, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
@@ -119,5 +160,5 @@ internal static partial class LoggerExtensions
     public static partial void StartingApp(this ILogger logger);
 
     [LoggerMessage(LogLevel.Information, "Weather forecast is `{forecast}`")]
-    public static partial void GetWeatherForecast(this ILogger logger, [LogProperties(OmitReferenceName = true)]WeatherForecast forecast);
+    public static partial void GetWeatherForecast(this ILogger logger, [LogProperties(OmitReferenceName = true)] WeatherForecast forecast);
 }

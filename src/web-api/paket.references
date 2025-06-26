@@ -8,3 +8,5 @@ OpenTelemetry.Instrumentation.Runtime
 OpenTelemetry.Instrumentation.Process
 OpenTelemetry.Extensions.Hosting
 Microsoft.Extensions.Telemetry.Abstractions
+Microsoft.Data.Sqlite
+Dapper

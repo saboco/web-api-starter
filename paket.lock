@@ -1,5 +1,8 @@
 NUGET
   remote: https://api.nuget.org/v3/index.json
+    Dapper (2.1.66)
+      Microsoft.Bcl.AsyncInterfaces (>= 9.0.1) - restriction: || (>= net461) (&& (< net8.0) (>= netstandard2.0))
+      System.Reflection.Emit.Lightweight (>= 4.7) - restriction: && (< net461) (< net8.0) (>= netstandard2.0)
     Microsoft.AspNetCore.Http.Abstractions (2.3) - restriction: && (< net8.0) (>= netstandard2.0)
       Microsoft.AspNetCore.Http.Features (>= 2.3) - restriction: >= netstandard2.0
       System.Text.Encodings.Web (>= 8.0) - restriction: >= netstandard2.0
@@ -8,9 +11,15 @@ NUGET
       System.IO.Pipelines (>= 5.0.2) - restriction: || (>= net461) (>= netstandard2.0)
     Microsoft.AspNetCore.OpenApi (9.0)
       Microsoft.OpenApi (>= 1.6.17) - restriction: >= net9.0
-    Microsoft.Bcl.AsyncInterfaces (9.0.6) - restriction: || (>= net462) (&& (>= net8.0) (< netstandard2.1)) (&& (< net8.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
+    Microsoft.Bcl.AsyncInterfaces (9.0.6) - restriction: || (>= net461) (&& (>= net462) (>= net8.0)) (&& (>= net462) (>= netstandard2.0)) (&& (>= net8.0) (< netstandard2.1)) (&& (< net8.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
       System.Threading.Tasks.Extensions (>= 4.5.4) - restriction: || (>= net462) (&& (>= netstandard2.0) (< netstandard2.1))
     Microsoft.Bcl.HashCode (6.0) - restriction: && (>= net462) (>= netstandard2.0)
+    Microsoft.Data.Sqlite (9.0.6)
+      Microsoft.Data.Sqlite.Core (>= 9.0.6) - restriction: >= netstandard2.0
+      SQLitePCLRaw.bundle_e_sqlite3 (>= 2.1.10) - restriction: >= netstandard2.0
+      SQLitePCLRaw.core (>= 2.1.10) - restriction: >= netstandard2.0
+    Microsoft.Data.Sqlite.Core (9.0.6) - restriction: >= netstandard2.0
+      SQLitePCLRaw.core (>= 2.1.10) - restriction: >= netstandard2.0
     Microsoft.Extensions.Compliance.Abstractions (9.6) - restriction: || (>= net462) (>= net8.0)
       Microsoft.Bcl.HashCode (>= 1.1.1) - restriction: && (< net8.0) (>= netstandard2.0)
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.2) - restriction: || (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.0))
@@ -127,6 +136,29 @@ NUGET
       OpenTelemetry.Api (>= 1.12 < 2.0) - restriction: >= netstandard2.0
     OpenTelemetry.Instrumentation.Runtime (1.12)
       OpenTelemetry.Api (>= 1.12 < 2.0) - restriction: || (>= net462) (>= netstandard2.0)
+    SQLitePCLRaw.bundle_e_sqlite3 (2.1.11) - restriction: >= netstandard2.0
+      SQLitePCLRaw.lib.e_sqlite3 (>= 2.1.11) - restriction: || (&& (< monoandroid9.0) (< net6.0-tvos) (>= netstandard2.0) (< xamarinios)) (>= net461) (>= net6.0-ios)
+      SQLitePCLRaw.lib.e_sqlite3.android (>= 2.1.11) - restriction: >= monoandroid9.0
+      SQLitePCLRaw.lib.e_sqlite3.ios (>= 2.1.11) - restriction: >= xamarinios
+      SQLitePCLRaw.lib.e_sqlite3.tvos (>= 2.1.11) - restriction: >= net6.0-tvos
+      SQLitePCLRaw.provider.dynamic_cdecl (>= 2.1.11) - restriction: >= net461
+      SQLitePCLRaw.provider.e_sqlite3 (>= 2.1.11) - restriction: || (>= monoandroid9.0) (&& (< net461) (< net6.0-tvos) (>= netstandard2.0) (< xamarinios)) (>= net6.0-ios)
+      SQLitePCLRaw.provider.internal (>= 2.1.11) - restriction: || (>= net6.0-tvos) (>= xamarinios)
+      System.Runtime.InteropServices.NFloat.Internal (>= 6.0.1) - restriction: || (>= net6.0-ios) (>= net6.0-tvos)
+    SQLitePCLRaw.core (2.1.11) - restriction: >= netstandard2.0
+      System.Memory (>= 4.5.3) - restriction: >= netstandard2.0
+    SQLitePCLRaw.lib.e_sqlite3 (2.1.11) - restriction: || (&& (< monoandroid9.0) (< net6.0-tvos) (>= netstandard2.0) (< xamarinios)) (&& (>= net461) (>= netstandard2.0)) (>= net6.0-ios)
+    SQLitePCLRaw.lib.e_sqlite3.android (2.1.11) - restriction: >= monoandroid9.0
+    SQLitePCLRaw.lib.e_sqlite3.ios (2.1.11) - restriction: >= xamarinios
+      System.Runtime.InteropServices.NFloat.Internal (>= 6.0.1) - restriction: >= net6.0-ios
+    SQLitePCLRaw.lib.e_sqlite3.tvos (2.1.11) - restriction: >= net6.0-tvos
+      System.Runtime.InteropServices.NFloat.Internal (>= 6.0.1) - restriction: >= net6.0-tvos
+    SQLitePCLRaw.provider.dynamic_cdecl (2.1.11) - restriction: && (>= net461) (>= netstandard2.0)
+      SQLitePCLRaw.core (>= 2.1.11) - restriction: >= netstandard2.0
+    SQLitePCLRaw.provider.e_sqlite3 (2.1.11) - restriction: || (>= monoandroid9.0) (&& (< net461) (< net6.0-tvos) (>= netstandard2.0) (< xamarinios)) (>= net6.0-ios)
+      SQLitePCLRaw.core (>= 2.1.11) - restriction: >= netstandard2.0
+    SQLitePCLRaw.provider.internal (2.1.11) - restriction: || (>= net6.0-tvos) (>= xamarinios)
+      SQLitePCLRaw.core (>= 2.1.11) - restriction: >= netstandard2.0
     System.Buffers (4.6.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
     System.Diagnostics.DiagnosticSource (9.0.6) - restriction: || (>= net462) (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.1)) (>= netstandard2.0)
       System.Memory (>= 4.5.5) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
@@ -135,12 +167,16 @@ NUGET
       System.Buffers (>= 4.5.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Memory (>= 4.5.5) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Threading.Tasks.Extensions (>= 4.5.4) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-    System.Memory (4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
+    System.Memory (4.6.3) - restriction: || (>= net462) (>= netstandard2.0)
       System.Buffers (>= 4.6.1) - restriction: || (>= net462) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
       System.Numerics.Vectors (>= 4.6.1) - restriction: || (>= net462) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
     System.Numerics.Vectors (4.6.1) - restriction: && (>= net462) (>= netstandard2.0)
-    System.Runtime.CompilerServices.Unsafe (6.1.2) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0)) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
+    System.Reflection.Emit.ILGeneration (4.7) - restriction: || (&& (< monoandroid) (< net45) (< netcoreapp2.0) (>= netstandard2.0) (< netstandard2.1) (< xamarintvos) (< xamarinwatchos)) (&& (>= netstandard2.0) (< portable-net45+wp8) (>= win8)) (&& (>= netstandard2.0) (< portable-net45+wp8) (< win8)) (&& (>= netstandard2.0) (>= uap10.1))
+    System.Reflection.Emit.Lightweight (4.7) - restriction: && (< net461) (< net8.0) (>= netstandard2.0)
+      System.Reflection.Emit.ILGeneration (>= 4.7) - restriction: || (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.0) (< netstandard2.0) (< win8) (< wp8) (< wpa81) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (< netcoreapp2.0) (>= netstandard2.0) (< netstandard2.1) (< xamarintvos) (< xamarinwatchos)) (&& (< netstandard2.0) (>= wpa81)) (&& (>= portable-net45+win8+wp8+wpa81) (< portable-net45+wp8) (< win8)) (&& (< portable-net45+wp8) (>= win8)) (>= uap10.1)
+    System.Runtime.CompilerServices.Unsafe (6.1.2) - restriction: || (&& (>= net461) (>= netstandard2.0)) (>= net462) (&& (< net8.0) (>= netstandard2.0)) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
+    System.Runtime.InteropServices.NFloat.Internal (6.0.1) - restriction: || (>= net6.0-ios) (>= net6.0-tvos)
     System.Text.Encodings.Web (9.0.6) - restriction: || (>= net462) (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.0))
       System.Buffers (>= 4.5.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Memory (>= 4.5.5) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
@@ -154,7 +190,7 @@ NUGET
       System.Text.Encodings.Web (>= 9.0.6) - restriction: || (>= net462) (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.0))
       System.Threading.Tasks.Extensions (>= 4.5.4) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.ValueTuple (>= 4.5) - restriction: >= net462
-    System.Threading.Tasks.Extensions (4.6.3) - restriction: || (>= net462) (&& (>= net8.0) (< netstandard2.1)) (&& (< net8.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
+    System.Threading.Tasks.Extensions (4.6.3) - restriction: || (&& (>= net461) (>= netstandard2.0)) (>= net462) (&& (>= net8.0) (< netstandard2.1)) (&& (< net8.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
     System.ValueTuple (4.6.1) - restriction: >= net462
 

@@ -10,6 +10,8 @@ nuget OpenTelemetry.Instrumentation.Runtime
 nuget OpenTelemetry.Instrumentation.Process
 nuget OpenTelemetry.Extensions.Hosting
 nuget Microsoft.Extensions.Telemetry.Abstractions
+nuget Microsoft.Data.Sqlite
+nuget Dapper
 
 
 group tests
