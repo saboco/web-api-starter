@@ -1,12 +1,15 @@
+using System.Net;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using web_api;
 
 var builder = WebApplication.CreateBuilder(args);
 var otlpEndpoint = new Uri(builder.Configuration.GetValue<string>("Otlp:Endpoint")!);
 
-builder.Services.AddOpenTelemetry()
+builder.Services
+    .AddOpenTelemetry()
     .ConfigureResource(r => r.AddService(builder.Environment.ApplicationName))
     .WithTracing(traceBuilder =>
         traceBuilder
@@ -50,6 +53,18 @@ builder.Services.AddOpenTelemetry()
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services
+    .AddHttpClient<AHttpClient>(opts => opts.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ExternalService:Endpoint")!))
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+    {
+        Proxy = new WebProxy
+        {
+            Address = new Uri("http://localhost:8888") // Fiddler
+        },
+        UseProxy = false, // enable proxy
+        ServerCertificateCustomValidationCallback =(_,_,_,_) => true
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,13 +80,15 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", (ILogger<Program> logger) =>
+app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipconfig) =>
     {
+        var country = await ipconfig.GetSomething("/country");
         var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
                 (
                     DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                     Random.Shared.Next(-20, 55),
+                    country.Trim(),
                     summaries[Random.Shared.Next(summaries.Length)]
                 ))
             .ToArray();
@@ -87,7 +104,11 @@ app.MapGet("/weatherforecast", (ILogger<Program> logger) =>
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+public partial class Program
+{
+}
+
+public record WeatherForecast(DateOnly Date, int TemperatureC, string Country, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }

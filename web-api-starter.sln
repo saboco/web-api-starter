@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0982B3A8-7261-4E83-8FCA-B14718199D0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-api-tests", "tests\web-api-tests\web-api-tests.csproj", "{CFF41082-4843-42F1-8A58-3381FF4D4B77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,8 +34,13 @@ Global
 		{91BDD458-CA30-47C1-B251-32ED23FE8429}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91BDD458-CA30-47C1-B251-32ED23FE8429}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91BDD458-CA30-47C1-B251-32ED23FE8429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF41082-4843-42F1-8A58-3381FF4D4B77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF41082-4843-42F1-8A58-3381FF4D4B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF41082-4843-42F1-8A58-3381FF4D4B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF41082-4843-42F1-8A58-3381FF4D4B77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{91BDD458-CA30-47C1-B251-32ED23FE8429} = {3CE97769-2501-4986-88E1-6349B2623EC8}
+		{CFF41082-4843-42F1-8A58-3381FF4D4B77} = {0982B3A8-7261-4E83-8FCA-B14718199D0F}
 	EndGlobalSection
 EndGlobal

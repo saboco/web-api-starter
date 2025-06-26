@@ -10,3 +10,13 @@ nuget OpenTelemetry.Instrumentation.Runtime
 nuget OpenTelemetry.Instrumentation.Process
 nuget OpenTelemetry.Extensions.Hosting
 nuget Microsoft.Extensions.Telemetry.Abstractions
+
+
+group tests
+source https://api.nuget.org/v3/index.json
+
+nuget coverlet.collector
+nuget Microsoft.NET.Test.Sdk
+nuget xunit
+nuget xunit.runner.visualstudio
+nuget Microsoft.AspNetCore.Mvc.Testing
