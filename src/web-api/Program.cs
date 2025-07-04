@@ -37,9 +37,7 @@ builder.Services
             .AddView(
                 instrumentName: "kestrel.connection.duration",
                 new Base2ExponentialBucketHistogramConfiguration())
-            // .AddRuntimeInstrumentation()
-            // .AddProcessInstrumentation()
-            //.AddConsoleExporter()
+            .SetExemplarFilter(ExemplarFilterType.TraceBased)
             .AddOtlpExporter(otelpExporter => otelpExporter.Endpoint = otlpEndpoint)
     )
     .WithLogging(loggerBuilder =>
@@ -74,15 +72,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-
-    // app.UseExceptionHandler(exceptionHandlerApp =>
-    // {
-    //     exceptionHandlerApp.Run(async context =>
-    //     {
-    //
-    //     });
-    // });
-
 }
 // app.UseHttpsRedirection();
 
@@ -93,7 +82,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", async (ILogger<Program> logger, AHttpClient ipconfig, Db db) =>
     {
-        var country = await ipconfig.GetSomething("/country");
+        var country = "France";  //await ipconfig.GetSomething("/country");
         var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
                 (
@@ -140,8 +129,6 @@ app.MapPut("/vote", async (HttpContext context, QuestionsStore questionsStore) =
     var vote =  await context.Request.ReadFromJsonAsync<Vote>();
     questionsStore.Vote(vote);
 });
-
-
 
 app.Run();
 
